@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+	<h1>User Registration</h1>
+	<form action="http://localhost/RESTslim/api/users" method="post">
+		<input type = "text" placeholder="email" name ="email"\>
+		<input type = "text" placeholder="name" name="name"\>
+		<input type = "text" placeholder="password" name="password"\>
+		<input type ="submit" value="Register" name="register"/>
+	</form>
+	
+	<h1>User Login</h1>
+	<form action="http://localhost/RESTslim/api/users/login" method="get">
+		<input type = "text" placeholder="email" name ="email"\>
+		<input type = "text" placeholder="password" name="password"\>
+		<input type ="submit" value="Login" name="register"/>
+	</form>
+	
+	<h1>User email verification</h1>
+	<form action="http://localhost/RESTslim/api/users/authenticate" method="post">
+		<input type = "text" placeholder="email" name ="email"\>
+		<input type = "text" placeholder="access token" name="access_token;"\>
+		<input type ="submit" value="Authenticate" name="Authenticate"/>
+	</form>
+</body>
+</html>
