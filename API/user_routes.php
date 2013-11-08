@@ -56,6 +56,11 @@ function RegisterUser($email , $password , $name) {
 	//When the user first registers he is inactive
 	$is_active = False; 
 	
+	if(GetUserByEmail($email))
+	{
+		return(SetErrorMessage("User with email id already registered"));
+	}
+	
 	$result = InsertNewUser($email,$password_hash,$name,$is_active,$access_token);
 	
 	if($result == 0 )
@@ -139,6 +144,8 @@ function RegenerateAccessToken($email , $password)
 	return SetErrorMessage("Access token successfully regenerated");
 }
 
+$app->response->headers->set('Content-Type', 'application/json');
+
 //User Registration
 $app->post('/api/users' , function() use ($app)	{
 		$email = $app->request->post('email');
@@ -150,27 +157,28 @@ $app->post('/api/users' , function() use ($app)	{
 	});
 	
 //User Login
-$app->get('/api/users/login' , function() use ($app)	{
-		$email = $app->request->get('email');
-		$password = $app->request->get('password');
-		
+$app->post('/api/users/login' , function() use ($app)	{
+		$email = $app->request->post('email');
+		$password = $app->request->post('password');
+		//$app->response->headers->set('Content-Type', 'application/json');
 		echo json_encode(LoginUser($email , $password));
 	});
 	
 //User Authenticate
-$app->post('/api/users/authenticate',function() use ($app){
-	$email = $app->request->post('email');
-	$id = $app->request->post('id');
-	$access_token = $app->request->post('access_token');
+$app->get('/api/users/authenticate',function() use ($app){
+	$email = $app->request->get('email');
+	$id = $app->request->get('id');
+	$access_token = $app->request->get('access_token');
 	
 	echo json_encode(AuthenticateUser($id , $email , $access_token));
 });
 
 //User Update
-$app->post('/api/user/:id' , function(){
-	$email = $app->request->post('email');
-	$name = $app->request->post('name');
-	$password = $app->request->post('password');
+$app->put('/api/user/:id' , function(){
+	$email = $app->request->put('email');
+	$name = $app->request->put('name');
+	$password = $app->request->put('password');
+	$access_token = $app->request->put('access_token');
 	
 	if($password != '')
 	{
