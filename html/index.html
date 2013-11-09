@@ -1,0 +1,112 @@
+<html>
+<head>
+</head>
+<body>
+<div class="login">
+	<h1>User Login</h1>
+	<form action="" method="post">
+		<input type = "text" placeholder="email" name ="email"\>
+		<input type = "text" placeholder="password" name="password"\>
+		<input type ="submit" value="Login" name="register"/>
+	</form>
+</div>
+<div class="registration">
+	<h1>User Registration</h1>
+	<form action="http://localhost/RESTslim/api/users" method="post">
+		<input type = "text" placeholder="email" name ="email"\>
+		<input type = "text" placeholder="name" name="name"\>
+		<input type = "text" placeholder="password" name="password"\>
+		<input type ="submit" value="Register" name="register"/>
+	</form>
+</div>
+</body>
+</html>
+
+
+<script src= "scripts\jquery.js"></script>
+<script src= "scripts\underscore.js"></script>
+<script src= "scripts\backbone-min.js"></script>
+
+
+<script src= "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+
+
+<script>
+/*
+	var Person = Backbone.Model.extend({
+        initialize: function(){
+            //alert("Welcome to this world");
+        }
+		defaults: {
+            name: 'Fetus',
+            age: 0
+        },
+    });
+	*/
+	/*
+	Person = Backbone.Model.extend({
+		urlRoot: 'user',
+        defaults: {
+            name: 'Fetus',
+            age: 0
+        },
+        initialize: function(){
+            alert("Welcome to this world");
+            this.on("change:name", function(model){
+                var name = model.get("name"); // 'Stewie Griffin'
+                alert("Changed my name to " + name );
+            });
+        }
+    });
+    
+    var person = new Person({ name: "Thomas", age: 67});
+    person.set({name: 'Stewie Griffin'}); // This triggers a change and will alert()
+	var TestView = Backbone.View.extend({
+		el : '.page' ,
+		render : function () {
+			this.$el.html("Welcome home");
+		}
+	});
+	
+    //var view = new TestView;
+	
+    var person = new Person({ name: "Thomas", age: 67});
+	
+	var Router = Backbone.Router.extend({
+		routes : {
+			'' : 'home' ,
+			'/admin' : 'admin'
+		}
+	});
+
+	var router = new Router();
+	router.on( 'route : home' , function(){
+		//console.log("Welcome home");
+		(new TestView).render();
+		});
+	router.on( 'route : admin' , function(){
+		console.log("Welcome to admin area");
+		$(".page").html("Admin");
+		});
+		
+	Backbone.history.start();
+	
+	person.save();
+	*/
+	
+	var User = Backbone.Model.extend({
+		urlRoot: 'http://localhost/RESTslim/api/users',
+		initialize: function(){
+            //alert("Welcome to this world");
+        },
+	});
+	
+	//var user = new User({'name':'aveek' , 'email':'test@test.com' , 'password':'password'});
+	user= new User({'id':'email' , password: 'aveek1'});
+	
+	user.fetch({data:{password: 'aveek'} , type: 'POST' ,success: function(){console.log(user.toJSON());}});
+	
+	
+</script>

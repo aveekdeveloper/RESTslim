@@ -21,6 +21,7 @@ require_once 'API/ThirdPartyLibraries/meekrodb.2.2.class.php';
  * of setting names and values into the application constructor.
  */
 $app = new \Slim\Slim();
+$app->add(new \Slim\Middleware\ContentTypes());
 
 /**
  * Step 3: Define the Slim application routes

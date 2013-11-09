@@ -36,7 +36,7 @@ function RegisterUser($email , $password , $name) {
 	//check if Email is valid
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
-		return SetErrorMessage("Invalid email provided for registration");
+		return SetErrorMessage("Invalid email provided for registration ".$email.$name.$password);
 	}
 	//check if name provided
 	if($name == '')
@@ -90,6 +90,8 @@ function LoginUser($email , $password) {
 	}
 	if(strcmp($user['password_hash'] ,$password_hash)==0)
 	{
+		//Do not give away the password hash
+		unset($user['password_hash']);
 		return $user;
 	} else
 	{
@@ -146,11 +148,56 @@ function RegenerateAccessToken($email , $password)
 
 $app->response->headers->set('Content-Type', 'application/json');
 
+//Get all users
+$app->get('/api/users',function(){
+		
+	});
+
+//View a particular user
+$app->get('/api/users/:idOrEmail' , function($idOrEmail) use($app){
+		//Try to get user by ID
+		$user = GetUserById($idOrEmail);
+		//If no user by that ID is obtained try getting a user by Email
+		$user = !empty($user)? $user : GetUserByEmail($idOrEmail);
+		
+		//Remove access token
+		unset($user['access_token']);
+		//Remove password hash
+		unset($user['password_hash']);
+		if(empty($user))
+		{
+			$app->response->setStatus(400);
+		}
+		echo json_encode((array)$user);
+	});
+	
+//An alternative login approach
+$app->post('/api/users/:email' , function($email) use($app){
+		
+		$request = (array)$app->request()->getBody();
+
+		//Give preference to payload data
+		$password = isset($request['password'])? $request['password'] : $app->request->post('password');
+		
+		$user = LoginUser($email , $password);
+		
+		if(isset($user['error']))
+		{
+			$app->response->setStatus(401);
+		}
+		echo json_encode($user);
+	});
+
 //User Registration
+//Includes support for JSON as well as normal form POST
 $app->post('/api/users' , function() use ($app)	{
-		$email = $app->request->post('email');
-		$name = $app->request->post('name');
-		$password = $app->request->post('password');
+		
+		$request = (array)$app->request()->getBody();
+		
+		//Give preference to Payload data
+		$email = isset($request['email'])? $request['email'] : $app->request->post('email');
+		$password = isset($request['password'])? $request['password'] : $app->request->post('email');
+		$name = isset($request['name'])? $request['name'] : $app->request->post('name');
 		
 		//Insert into table and set the user as inactive
 		echo json_encode(RegisterUser($email , $password , $name));
@@ -158,9 +205,13 @@ $app->post('/api/users' , function() use ($app)	{
 	
 //User Login
 $app->post('/api/users/login' , function() use ($app)	{
-		$email = $app->request->post('email');
-		$password = $app->request->post('password');
-		//$app->response->headers->set('Content-Type', 'application/json');
+
+		$request = (array)$app->request()->getBody();
+
+		//Give preference to payload data
+		$email = isset($request['email'])? $request['email'] : $app->request->post('email');
+		$password = isset($request['password'])? $request['password'] : $app->request->post('password');
+
 		echo json_encode(LoginUser($email , $password));
 	});
 	
