@@ -116,7 +116,7 @@ function AuthenticateUser($id ='', $email ='', $access_token)
 		return SetErrorMessage("The user could not be authenticated");
 	}
 	
-	if(strcmp($user['access_token'] , $access_token))
+	if(strcmp($user['access_token'] , $access_token)==0)
 	{
 		if($user['is_active'] == 0)
 		{
@@ -204,7 +204,7 @@ $app->post('/api/users' , function() use ($app)	{
 	});
 	
 //User Login
-$app->post('/api/users/login' , function() use ($app)	{
+$app->post('/api/login' , function() use ($app)	{
 
 		$request = (array)$app->request()->getBody();
 
@@ -216,11 +216,12 @@ $app->post('/api/users/login' , function() use ($app)	{
 	});
 	
 //User Authenticate
-$app->get('/api/users/authenticate',function() use ($app){
+$app->get('/api/authenticate',function() use ($app){
+	
 	$email = $app->request->get('email');
 	$id = $app->request->get('id');
 	$access_token = $app->request->get('access_token');
-	
+
 	echo json_encode(AuthenticateUser($id , $email , $access_token));
 });
 

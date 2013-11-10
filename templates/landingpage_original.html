@@ -11,16 +11,16 @@
 	</form>
 	
 	<h1>User Login</h1>
-	<form action="http://localhost/RESTslim/api/login/users" method="post">
+	<form action="http://localhost/RESTslim/api/login" method="post">
 		<input type = "text" placeholder="email" name ="email"\>
 		<input type = "text" placeholder="password" name="password"\>
 		<input type ="submit" value="Login" name="register"/>
 	</form>
 	
 	<h1>User email verification</h1>
-	<form action="http://localhost/RESTslim/api/users/authenticate" method="get">
+	<form action="http://localhost/RESTslim/api/authenticate" method="get">
 		<input type = "text" placeholder="email" name ="email"\>
-		<input type = "text" placeholder="access token" name="access_token;"\>
+		<input type = "text" placeholder="access token" name="access_token"\>
 		<input type ="submit" value="Authenticate" name="Authenticate"/>
 	</form>
 </body>

@@ -1,0 +1,76 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#" name="top">GeoLocate</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav">
+					<li><a href="#"><i class="icon-home"></i> Home</a></li>
+					<li class="divider-vertical"></li>
+					
+				</ul>
+				<ul class="nav pull-right" id="SignIn_SignUp_Profile">
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+		<!--/.container-fluid -->
+	</div>
+	<!--/.navbar-inner -->
+</div>
+<!--/.navbar -->
+
+
+
+<script type="text/template" id="profile_templete">
+<li class="dropdown">
+	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Profile <strong class="caret"></strong></a>
+	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+		<form method="post" action="login" accept-charset="UTF-8">								
+			<div class="input-prepend">
+				<span class="add-on">Name</span>
+				<input style="margin-bottom: 15px;" type="text" placeholder="Your Full Name" id="name" name="name" value= <%= user.get("name") %> disabled>
+			</div>
+			<input class="btn btn-warning btn-block" type="button" id="Update" value="Update">
+		</form>
+		<a> Regenerate Access Token </a>
+		<hr>
+		<input class="btn btn-primary btn-block" type="button" id="logoutButton" value="Logout">
+		<hr>
+	</div>
+</li>
+</script>
+
+<script type="text/template" id= "signin_signup_template">
+<li class="dropdown">
+	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+		<form method="post" class= "signIn-User-Form">
+			<input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">
+			<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+			<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
+			<label class="string optional" for="user_remember_me"> Remember me</label>
+			<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+		</form>
+	</div>
+</li>
+<li class="divider-vertical"></li>
+<li class="dropdown">
+	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign Up <strong class="caret"></strong></a>
+	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+		<form method="post" action="login" accept-charset="UTF-8">
+			<label>* All Fields are Compulsory</label>
+			<br/>
+			<input style="margin-bottom: 15px;" type="text" placeholder="Your Email" id="email" name="email">
+			<input style="margin-bottom: 15px;" type="text" placeholder="Your Full Name" id="name" name="name">
+			<input style="margin-bottom: 15px;" type="password" placeholder="New Password" id="password" name="password">
+			<input style="margin-bottom: 15px;" type="password" placeholder="Re-enter Password" id="password" name="password">
+			<input class="btn btn-primary btn-block" type="button" id="sign-up" value="Sign Up">
+		</form>
+	</div>
+</li>
+</script>

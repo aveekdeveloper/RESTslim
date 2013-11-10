@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>GeoLocate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="Bootstrap_files/bootstrap.css" rel="stylesheet">
+    <link href="Bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+    <link href="Bootstrap_files/docs.css" rel="stylesheet">
+    <link href="Bootstrap_files/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="http://getbootstrap.com/2.3.2/assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="http://getbootstrap.com/2.3.2/assets/ico/favicon.png">
+
+    
+  
+
+  <body>
+<?php include_once 'navbar.html' ?>
+	
+<div class="container-fluid" >
+    <div class="row-fluid">
+		<div class="span4" style="background-color: #bbd8e9;">
+		</div>
+		<div class="span8">			
+		</div>
+    </div>
+	<hr class="soften">    
+</div>
+
+
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <ul class="footer-links">
+          <li><a href="#">Contact Us</a></li>
+          <li class="muted">·</li>
+          <li><a href="#">About Us</a></li>
+          <li class="muted">·</li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="Bootstrap_files/widgets.js"></script>
+    <script src="Bootstrap_files/jquery.js"></script>
+    <script src="Bootstrap_files/bootstrap-transition.js"></script>
+    <script src="Bootstrap_files/bootstrap-alert.js"></script>
+    <script src="Bootstrap_files/bootstrap-modal.js"></script>
+    <script src="Bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="Bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="Bootstrap_files/bootstrap-tab.js"></script>
+    <script src="Bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="Bootstrap_files/bootstrap-popover.js"></script>
+    <script src="Bootstrap_files/bootstrap-button.js"></script>
+    <script src="Bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="Bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="Bootstrap_files/bootstrap-typeahead.js"></script>
+    <script src="Bootstrap_files/bootstrap-affix.js"></script>
+
+    <script src="Bootstrap_files/holder.js"></script>
+    <script src="Bootstrap_files/prettify.js"></script>
+
+    <script src="Bootstrap_files/application.js"></script>
+</body></html>
+
+<script src= "scripts\jquery.js"></script>
+<script src= "scripts\underscore.js"></script>
+<script src= "scripts\backbone-min.js"></script>
+
+
+<script src= "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+
+<script>
+$.fn.serializeObject = function() {
+	var o = {};
+	var a = this.serializeArray();
+	$.each(a, function() {
+		if (o[this.name]) {
+			if (!o[this.name].push) {
+				o[this.name] = [o[this.name]];
+			}
+			o[this.name].push(this.value || '');
+		} else {
+			o[this.name] = this.value || '';
+		}
+	});
+	return o;
+};
+	var SignIn_SignUp_Profile_View = Backbone.View.extend({
+	initialize: function(){
+			_.bindAll(this, "render");
+			this.listenTo(window.user, 'change', this.render);
+			this.render();
+		  },
+	el: '#SignIn_SignUp_Profile',
+	events : {
+		"submit .signIn-User-Form" : "Login",
+		"click #logoutButton" : "Logout",
+		"click #sign-up" : "Register",		
+	},
+	Login : function(ev){
+				var userDetails = $(ev.currentTarget).serializeObject();
+				window.user = new User({'id':userDetails.email});
+				window.user.fetch({data:{password: userDetails.password} , type: 'POST' ,
+					success: function(){
+							console.log("Login Successful");
+							window.signin_signup_profile_view.render();
+							//set cookie
+							$.cookie("user", JSON.stringify(window.user.toJSON()), { expires : 10 });
+							},
+					error: function(xhr, status, error){
+							alert("Invalid Email or Password");
+							}							
+						});
+				//this.render();
+				return false;
+			},
+	Logout : function(ev){
+			$.removeCookie('user');
+			window.user = new User({});
+			this.render();
+			//alert("You have been looged out");
+			},
+	Register : function(event){
+				alert("Register");
+			},
+	template_profile : '',
+	template_signin_signup :'',
+	render : function() {
+				this.template_profile = _.template($('#profile_templete').html(),{user : window.user});
+				this.template_signin_signup = _.template($('#signin_signup_template').html(),{user : window.user});
+				
+				if(window.user.get('access_token'))
+				{
+					this.$el.html(this.template_profile);
+				} else
+				{
+					this.$el.html(this.template_signin_signup);
+				}	
+			}
+	});
+	
+	var User = Backbone.Model.extend({
+		urlRoot: 'http://localhost/RESTslim/api/users',
+		initialize: function(){
+        },
+	});
+	
+	var userDetails = JSON.parse($.cookie("user"));
+	window.user= new User(userDetails);
+	
+	signin_signup_profile_view = new SignIn_SignUp_Profile_View();
+		
+</script>
