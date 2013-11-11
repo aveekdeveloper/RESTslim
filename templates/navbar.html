@@ -62,14 +62,15 @@
 <li class="dropdown">
 	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign Up <strong class="caret"></strong></a>
 	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-		<form method="post" action="login" accept-charset="UTF-8">
+		<form method="post" class= "signUp-User-Form" accept-charset="UTF-8">
 			<label>* All Fields are Compulsory</label>
 			<br/>
 			<input style="margin-bottom: 15px;" type="text" placeholder="Your Email" id="email" name="email">
 			<input style="margin-bottom: 15px;" type="text" placeholder="Your Full Name" id="name" name="name">
 			<input style="margin-bottom: 15px;" type="password" placeholder="New Password" id="password" name="password">
-			<input style="margin-bottom: 15px;" type="password" placeholder="Re-enter Password" id="password" name="password">
-			<input class="btn btn-primary btn-block" type="button" id="sign-up" value="Sign Up">
+			<!--<input style="margin-bottom: 15px;" type="password" placeholder="Re-enter Password" id="repassword" name="repassword">-->
+			<div class="error" ></div>
+			<input class="btn btn-primary btn-block" type="submit" id="sign-up" value="Sign Up">
 		</form>
 	</div>
 </li>

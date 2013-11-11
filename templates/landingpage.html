@@ -97,21 +97,30 @@
 <script src= "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
 
 <script>
-$.fn.serializeObject = function() {
-	var o = {};
-	var a = this.serializeArray();
-	$.each(a, function() {
-		if (o[this.name]) {
-			if (!o[this.name].push) {
-				o[this.name] = [o[this.name]];
+	//Validate Email
+	function validateEmail(email) { 
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	} 
+	
+	//Serialize any form object into JSON
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [o[this.name]];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
 			}
-			o[this.name].push(this.value || '');
-		} else {
-			o[this.name] = this.value || '';
-		}
-	});
-	return o;
-};
+		});
+		return o;
+	};
+	
+	
 	var SignIn_SignUp_Profile_View = Backbone.View.extend({
 	initialize: function(){
 			_.bindAll(this, "render");
@@ -122,7 +131,7 @@ $.fn.serializeObject = function() {
 	events : {
 		"submit .signIn-User-Form" : "Login",
 		"click #logoutButton" : "Logout",
-		"click #sign-up" : "Register",		
+		"submit .signUp-User-Form" : "Register",		
 	},
 	Login : function(ev){
 				var userDetails = $(ev.currentTarget).serializeObject();
@@ -132,26 +141,63 @@ $.fn.serializeObject = function() {
 							console.log("Login Successful");
 							window.signin_signup_profile_view.render();
 							//set cookie
-							$.cookie("user", JSON.stringify(window.user.toJSON()), { expires : 10 });
+							$.cookie("user", JSON.stringify(window.user.toJSON()), { expires : 7 });
 							},
 					error: function(xhr, status, error){
 							alert("Invalid Email or Password");
 							}							
 						});
-				//this.render();
 				return false;
 			},
 	Logout : function(ev){
-			$.removeCookie('user');
-			window.user = new User({});
-			this.render();
-			//alert("You have been looged out");
+				$.removeCookie('user');
+				window.user = new User({});
+				this.render();
+				console.log("User logged out");
 			},
-	Register : function(event){
-				alert("Register");
+	Register : function(ev){
+				var userDetails = $(ev.currentTarget).serializeObject();
+				var validate = this.validateRegistrationForm(userDetails);
+				
+				if(validate != 0)
+				{
+					this.$el.find(".error").html(
+										"<div class='alert alert-error'>"+
+										"<button type='button' class='close' data-dismiss='alert'>"+
+										"&times;</button><strong>Error!</strong> "+validate+"</div>"
+										);
+					return false;
+				}
+				
+				var user = new User(userDetails);
+				user.save({},{
+					success : function(){
+						alert("Accepeted registration. You will get a mail.");
+						}
+					});
+				return false;
 			},
+	//Validate user registration form
+	validateRegistrationForm : 	function (ud){
+									if(ud.email == '' || ud.name == '' || ud.password == '' )
+									{
+										//All fields are compulsory
+										return "All fields are compulsory";
+									}
+									if(!validateEmail(ud.email))
+									{
+										return "Email is not valid";
+									}
+									if(ud.password != ud.repassword )
+									{
+										//Password and Confirm password should match
+										return "Password and Confirm password do not match";
+									}									
+									return 0;
+								} ,
 	template_profile : '',
-	template_signin_signup :'',
+	template_signin_signup : '',
+	template_error : '',
 	render : function() {
 				this.template_profile = _.template($('#profile_templete').html(),{user : window.user});
 				this.template_signin_signup = _.template($('#signin_signup_template').html(),{user : window.user});
@@ -168,6 +214,9 @@ $.fn.serializeObject = function() {
 	
 	var User = Backbone.Model.extend({
 		urlRoot: 'http://localhost/RESTslim/api/users',
+		validate: function(attrs, options) {
+			
+		  },
 		initialize: function(){
         },
 	});

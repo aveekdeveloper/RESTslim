@@ -200,7 +200,12 @@ $app->post('/api/users' , function() use ($app)	{
 		$name = isset($request['name'])? $request['name'] : $app->request->post('name');
 		
 		//Insert into table and set the user as inactive
-		echo json_encode(RegisterUser($email , $password , $name));
+		$user = RegisterUser($email , $password , $name);
+		if(isset($user['error']))
+		{
+			$app->response->setStatus(401);
+		}
+		echo json_encode($user);
 	});
 	
 //User Login
