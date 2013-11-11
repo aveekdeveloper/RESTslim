@@ -141,7 +141,12 @@
 							console.log("Login Successful");
 							window.signin_signup_profile_view.render();
 							//set cookie
-							$.cookie("user", JSON.stringify(window.user.toJSON()), { expires : 7 });
+							var options ={};
+							if(userDetails.rememberme == 1)
+							{
+								options = {expires : 365};
+							}
+							$.cookie("user", JSON.stringify(window.user.toJSON()), options);
 							},
 					error: function(xhr, status, error){
 							alert("Invalid Email or Password");
@@ -197,7 +202,6 @@
 								} ,
 	template_profile : '',
 	template_signin_signup : '',
-	template_error : '',
 	render : function() {
 				this.template_profile = _.template($('#profile_templete').html(),{user : window.user});
 				this.template_signin_signup = _.template($('#signin_signup_template').html(),{user : window.user});

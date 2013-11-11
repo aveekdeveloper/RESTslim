@@ -50,10 +50,13 @@
 	<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
 	<div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
 		<form method="post" class= "signIn-User-Form">
+			<label class="control-label" for="email">Email:</label>
 			<input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">
+			<label class="control-label" for="password">Password:</label>
 			<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
-			<input style="float: left; margin-right: 10px;" type="checkbox" name="remember-me" id="remember-me" value="1">
-			<label class="string optional" for="user_remember_me"> Remember me</label>
+			<hr/>
+			<input style="float: left; margin-right: 10px;" type="checkbox" name="rememberme" id="rememberme" value="1">
+			<label class="string optional" for="remember-me"> Keep me logged in</label>
 			<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
 		</form>
 	</div>
@@ -65,8 +68,11 @@
 		<form method="post" class= "signUp-User-Form" accept-charset="UTF-8">
 			<label>* All Fields are Compulsory</label>
 			<br/>
+			<label class="control-label" for="email">Email:</label>
 			<input style="margin-bottom: 15px;" type="text" placeholder="Your Email" id="email" name="email">
+			<label class="control-label" for="name">Name:</label>
 			<input style="margin-bottom: 15px;" type="text" placeholder="Your Full Name" id="name" name="name">
+			<label class="control-label" for="password">Password:</label>
 			<input style="margin-bottom: 15px;" type="password" placeholder="New Password" id="password" name="password">
 			<!--<input style="margin-bottom: 15px;" type="password" placeholder="Re-enter Password" id="repassword" name="repassword">-->
 			<div class="error" ></div>
@@ -74,4 +80,11 @@
 		</form>
 	</div>
 </li>
+</script>
+
+<script type="text/template" id="error_template">
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>Error!</strong><%= error %>
+</div>
 </script>
