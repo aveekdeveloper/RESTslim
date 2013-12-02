@@ -32,12 +32,15 @@ $app->add(new \Slim\Middleware\ContentTypes());
  * is an anonymous function.
  */
 include_once 'API/user_routes.php';
+include_once 'API/book_routes.php';
 
 // GET route
 $app->get(
     '/',    function() use($app){
 		$app->response->headers->set('Content-Type', 'text/html');
-		$app->render('landingpage.html');
+		//$app->render('landingpage.html');
+		$app->render('bootstrap_dashboard.htm');
+		//$app->render('new_homepage.html');
     }
 );
 

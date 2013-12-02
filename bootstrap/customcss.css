@@ -1,0 +1,8 @@
+body {
+  /*min-height: 2000px;*/
+  padding-top: 70px;
+}
+html, body{
+    height: 100%;
+}
+.navbar-nav>li>.dropdown-menu { width: 62px; }

@@ -1,5 +1,5 @@
 <?php
-include_once 'userdbQueries.php';
+include_once 'user_dbQueries.php';
  
 function unique_md5() {
     mt_srand(microtime(true)*100000 + memory_get_usage(true));
@@ -113,7 +113,8 @@ function AuthenticateUser($id ='', $email ='', $access_token)
 	
 	if($user == NULL)
 	{
-		return SetErrorMessage("The user could not be authenticated");
+		//return SetErrorMessage("The user could not be authenticated");
+		return False;
 	}
 	
 	if(strcmp($user['access_token'] , $access_token)==0)

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
+
+    <title>GeoLocate</title>
+
+    <!-- Bootstrap core CSS -->
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./bootstrap/customcss.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+    <![endif]-->
+  </head>
+
+  <body style="">
+
+    <!-- Fixed navbar -->
+    <?php include_once 'bootstrap_navbar.html' ?>
+
+    <div class="col-md-9">
+      <div  id="map_Search_form" class="row well">
+        <form class="form-inline" role="form">
+          <div class="col-md-2">
+            <!--Enter book name-->
+            <input type="email" class="form-control" id="book_name_text" placeholder="Enter book name">
+          </div>
+          <div class="col-md-5">
+            <div class="col-md-1">Within</div>         
+            <div class="col-md-2">
+              <input type="number" class="form-control" id="km_text" placeholder="">
+            </div>
+            <div class="col-md-1">KMs</div>
+          </div>
+          <div class="col-md-1">
+            around
+            <input type="text" class="form-control" id="around_text" placeholder="around">
+          </div>
+          <button type="submit" class="btn btn-default">Search</button>
+        </form>
+      </div>
+      
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div   id="map_canvas" style="height:490px;">       
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <div class="well">
+        
+        <form method="post" class= "signIn-User-Form">
+          <label class="control-label sr-only" for="email">Email:</label>
+          <input class="form-control" style="margin-bottom: 10px;" type="text" placeholder="Email" id="email" name="email">
+          <label class="control-label sr-only" for="password">Password:</label>
+          <input class="form-control" style="margin-bottom: 10px;" type="password" placeholder="Password" id="password" name="password">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="remberme"> Remember me
+            </label>
+            <strong> . </strong>
+            <a href="">Forgot Password?</a>
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+        </form> 
+      </div>
+      <div class="well">
+        <h4>New user? <small>Sign Up</small></h4>
+        <hr>
+        <form method="post" class= "signUp-User-Form" accept-charset="UTF-8">
+          <label class="control-label sr-only" for="email">Email:</label>
+          <input class="form-control" style="margin-bottom: 10px;" type="text" placeholder="Your Email" id="email" name="email">
+          <label class="control-label sr-only" for="name">Name:</label>
+          <input class="form-control" style="margin-bottom: 10px;" type="text" placeholder="Your Full Name" id="name" name="name">
+          <label class="control-label sr-only" for="password">Password:</label>
+          <input class="form-control" style="margin-bottom: 10px;" type="password" placeholder="New Password" id="password" name="password">
+          <!--<input style="margin-bottom: 10px;" type="password" placeholder="Re-enter Password" id="repassword" name="repassword">-->
+          <div class="error" ></div>
+          <input class="btn btn-success btn-block" type="submit" id="sign-up" value="Sign Up">
+        </form>
+    </div>
+      </div>
+      
+
+    </div> <!-- /container -->
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	 <script src="./bootstrap/js/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+  
+
+</body></html>
+
+<script src= "scripts\jquery.js"></script>
+<script src= "scripts\underscore.js"></script>
+<script src= "scripts\backbone-min.js"></script>
+
+
+<script src= "//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+<script src= "//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script src="/assets/gmap3.js?body=1" type="text/javascript"></script>
+
+
+
+<script>
+  //Validate Email
+  function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  } 
+  
+  //Serialize any form object into JSON
+  $.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+      if (o[this.name]) {
+        if (!o[this.name].push) {
+          o[this.name] = [o[this.name]];
+        }
+        o[this.name].push(this.value || '');
+      } else {
+        o[this.name] = this.value || '';
+      }
+    });
+    return o;
+  };
+  
+  
+  var SignIn_SignUp_Profile_View = Backbone.View.extend({
+  initialize: function(){
+      _.bindAll(this, "render");
+      this.listenTo(window.user, 'change', this.render);
+      this.render();
+      },
+  el: '#SignIn_SignUp_Profile',
+  events : {
+    "submit .signIn-User-Form" : "Login",
+    "click #logoutButton" : "Logout",
+    "submit .signUp-User-Form" : "Register",    
+  },
+  Login : function(ev){
+        var userDetails = $(ev.currentTarget).serializeObject();
+        window.user = new User({'id':userDetails.email});
+        window.user.fetch({data:{password: userDetails.password} , type: 'POST' ,
+          success: function(){
+              console.log("Login Successful");
+              window.signin_signup_profile_view.render();
+              //set cookie
+              var options ={};
+              if(userDetails.rememberme == 1)
+              {
+                options = {expires : 365};
+              }
+              $.cookie("user", JSON.stringify(window.user.toJSON()), options);
+              },
+          error: function(xhr, status, error){
+              alert("Invalid Email or Password");
+              }             
+            });
+        return false;
+      },
+  Logout : function(ev){
+        $.removeCookie('user');
+        window.user = new User({});
+        this.render();
+        console.log("User logged out");
+      },
+  Register : function(ev){
+        var userDetails = $(ev.currentTarget).serializeObject();
+        var validate = this.validateRegistrationForm(userDetails);
+        
+        if(validate != 0)
+        {
+          this.$el.find(".error").html(
+                    "<div class='alert alert-danger'>"+
+                    "<button type='button' class='close' data-dismiss='alert'>"+
+                    "&times;</button><strong>Error!</strong> "+validate+"</div>"
+                    );
+          return false;
+        }
+        
+        var user = new User(userDetails);
+        user.save({},{
+          success : function(){
+            alert("Accepeted registration. You will get a mail.");
+            }
+          });
+        return false;
+      },
+  //Validate user registration form
+  validateRegistrationForm :  function (ud){
+                  if(ud.email == '' || ud.name == '' || ud.password == '' )
+                  {
+                    //All fields are compulsory
+                    return "All fields are compulsory";
+                  }
+                  if(!validateEmail(ud.email))
+                  {
+                    return "Email is not valid";
+                  }
+                  if(ud.password != ud.repassword )
+                  {
+                    //Password and Confirm password should match
+                    return "Password and Confirm password do not match";
+                  }                 
+                  return 0;
+                } ,
+  template_profile : '',
+  template_signin_signup : '',
+  render : function() {
+        this.template_profile = _.template($('#profile_templete').html(),{user : window.user});
+        this.template_signin_signup = _.template($('#signin_signup_template').html(),{user : window.user});
+        
+        if(window.user.get('access_token'))
+        {
+          this.$el.html(this.template_profile);
+        } else
+        {
+          this.$el.html(this.template_signin_signup);
+        } 
+      }
+  });
+  
+  var User = Backbone.Model.extend({
+    urlRoot: 'http://localhost/RESTslim/api/users',
+    validate: function(attrs, options) {
+      
+      },
+    initialize: function(){
+        },
+  });
+  
+  var userDetails = JSON.parse($.cookie("user"));
+  window.user= new User(userDetails);
+  
+  signin_signup_profile_view = new SignIn_SignUp_Profile_View();
+
+
+  function initialize() {
+        var map_options = {
+            center: new google.maps.LatLng(33.84673,-84.35697),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var google_map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+
+        var info_window = new google.maps.InfoWindow({
+            content: 'loading'
+        });
+
+        var t = [];
+        var x = [];
+        var y = [];
+        var h = [];
+
+        t.push('Location Name 1');
+        x.push(33.84659);
+        y.push(-84.35686);
+        h.push('<p>The monk who sold his ferrari<br/><strong>Aveek Mukherjee</strong><br/><a>Message him</a></p>');
+
+        t.push('Location Name 2');
+        x.push(33.846253);
+        y.push(-84.362125);
+        h.push('<p><strong>Location Name 2</strong><br/>Address 2</p><button>Click</button>');
+
+        var i = 0;
+        for ( item in t ) {
+            var m = new google.maps.Marker({
+                map:       google_map,
+                animation: google.maps.Animation.DROP,
+                title:     t[i],
+                position:  new google.maps.LatLng(x[i],y[i]),
+                html:      h[i]
+            });
+
+            google.maps.event.addListener(m, 'click', function() {
+                info_window.setContent(this.html);
+                document.getElementById("some_message").innerHTML = this.html;
+               // alert("this.html");
+               // info_window.open(google_map, this);
+            });
+            i++;
+        }
+    }
+
+initialize();
+
+    
+</script>
