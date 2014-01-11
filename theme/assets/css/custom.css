@@ -25,3 +25,10 @@ html, body {
     right:0;
     margin-top:50px; /* Set margin to your navbar height */
 }
+.book-intro{
+	padding-left:10px;
+}
+.rating-num { 
+	margin-top:0px;
+	font-size: 25px; 
+	}
