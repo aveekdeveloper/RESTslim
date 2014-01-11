@@ -9,8 +9,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 function onLocationFound(e) {
 	var radius = e.accuracy * 2;
 
-	L.marker(e.latlng).addTo(map)
-		.bindPopup("You are within " + radius + " meters from this point").openPopup();
+	L.marker(e.latlng).addTo(map).bindPopup("<b>Rohit Kumar Shaw</b><br/><i>Rating: 4.0</i><br/><a href='https://www.facebook.com/rohitimaginative' target='_blank'>Facebook</a><hr/><a class='btn btn-default' href=''>Follow</a><a class='btn btn-default' href=''>Ask book</a>").openPopup();
+		//.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
 	L.circle(e.latlng, radius).addTo(map);
 }
