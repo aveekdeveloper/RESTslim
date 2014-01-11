@@ -28,6 +28,9 @@ html, body {
 .book-intro{
 	padding-left:10px;
 }
+.book-intro.row{
+	font-size: 54px;
+}
 .rating-num { 
 	margin-top:0px;
 	font-size: 25px; 
