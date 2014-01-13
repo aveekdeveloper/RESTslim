@@ -15,6 +15,7 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+	<link href="assets/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
 	<link href="assets/css/custom.css" rel="stylesheet">
 	
@@ -65,55 +66,72 @@
     </div>
 	
 	<div class="container">
-	<h3>Sexy Sidebar Navigation<br />
-        <small>A simple, sheek navigation bar style!</small>
-    </h3>
     <br />
-    
+    <br/>
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-md-2">
             <nav class="nav-sidebar">
                 <ul class="nav">
-                    <li class="active"><a href="javascript:;">Home</a></li>
-                    <li><a href="javascript:;">About</a></li>
-                    <li><a href="javascript:;">Products</a></li>
-                    <li><a href="javascript:;">FAQ</a></li>
+                    <li class="active"><a href="javascript:;">List a new Book</a></li>
+                    <li><a href="javascript:;">Library</a></li>
+                    <li><a href="javascript:;">Messages</a></li>
+					<li><a href="javascript:;">Past Searches</a></li>
                     <li class="nav-divider"></li>
-                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
+                    <li><a href="javascript:;"><i class="glyphicon glyphicon-user"></i> Profile info</a></li>
                 </ul>
             </nav>
         </div>
-        <div class="col-sm-2 col-sm-offset-8">
-        <nav class="nav-sidebar pull-right">
-                <ul class="nav">
-                    <li class="active"><a href="javascript:;">Home</a></li>
-                    <li><a href="javascript:;">A long link will naturally wrap around</a></li>
-                    <li class="text-overflow" title="An long link with .text-overflow"><a href="javascript:;">A link with .text-overflow can be applied in case it's too long!</a></li>
-                    <li>
-                        <a href="javascript:;" class="media">
-                            <span class="pull-left">
-                                <i class="media-object glyphicon glyphicon-list"></i>
-                            </span>
-                            <div class="media-body">
-                                A media object can also be a link, making longer wrapping links play well with the icons!
-                            </div>
-                        </a>
-                    </li>
-                    <li class="text-overflow" title="Combine them all to make an awesome, safe solution!">
-                        <a href="javascript:;" class="media">
-                            <span class="pull-left">
-                                <i class="media-object glyphicon glyphicon-list"></i>
-                            </span>
-                            <div class="media-body">
-                                Combine them all to make an awesome, safe solution!
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-divider"></li>
-                    <li><a href="javascript:;"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
-                </ul>
-            </nav>
-        </div>
+        
+		<div class="profile-body col-md-10">
+			<div class="panel panel-default">
+			  <div class="panel-body">
+				<form class="form-horizontal">
+				<fieldset>
+
+				<!-- Form Name -->
+				<legend>List a book</legend>
+
+				<!-- Text input-->
+				<div class="control-group">
+				  <label class="control-label" for="name">Book name</label>
+				  <div class="controls">
+					<input id="name" name="name" type="text" placeholder="eg: Five Point Someone" class="input-xxlarge" required="">
+					<p class="help-block">Enter the name of book you want to add</p>
+				  </div>
+				</div>
+
+				<!-- Text input-->
+				<div class="control-group">
+				  <label class="control-label" for="readdate">When did you read it</label>
+				  <div class="controls">
+					<input id="readdate" name="readdate" type="text" placeholder="Enter the date" class="input-xxlarge">
+					<p class="help-block">This will be used to order your library</p>
+				  </div>
+				</div>
+
+				<!-- Textarea -->
+				<div class="control-group">
+				  <label class="control-label" for="Review">Write a review</label>
+				  <div class="controls">                     
+					<textarea id="Review" name="Review">How did you like it? Did you enjoy or was it a waste of time?</textarea>
+				  </div>
+				</div>
+
+				<!-- Button -->
+				<div class="control-group">
+				  <label class="control-label" for="singlebutton">Single Button</label>
+				  <div class="controls">
+					<button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+				  </div>
+				</div>
+
+				</fieldset>
+				</form>
+
+			  </div>
+			</div>
+		</div>
+		
     </div>
 </div>
 	
@@ -125,6 +143,7 @@
 	
 	<script src="assets/js/leaflet.js"></script>
 	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/bootstrap-datepicker.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	
   </body>

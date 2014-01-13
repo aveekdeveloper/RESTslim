@@ -15,6 +15,7 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+	<link href="assets/css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
 	<link href="assets/css/custom.css" rel="stylesheet">
 	
@@ -64,20 +65,30 @@
       </div>
     </div>
 	
-	<div id="map">
-	</div>
-	
-	<div id="review">
-		<div class="book-intro row">
-				<div class="col-md-2">
-					<span class="book-intro-rating"><strong>3.5</strong><span class="book-intro-small">/5</span></span>
-				</div>
-				<div class="col-md-10">
-					<h2>The Incredible Banker</h2>
-					<h5><strong>135 </strong>readers found</h5>
-				</div>	
-		</div>
-		<ul class="list-group">
+	<div class="container">
+    <br />
+    <br/>
+    <div >
+        <div class="">
+            <nav class="nav-sidebar">
+                <ul class="nav">
+                    <li><a href="javascript:;">List a new Book</a></li>
+                    <li class="active"><a href="javascript:;">Library</a></li>
+                    <li><a href="javascript:;">Messages</a></li>
+					<li><a href="javascript:;">Past Searches</a></li>
+                    <li class="nav-divider"></li>
+                    <li><a href="javascript:;"><i class="glyphicon glyphicon-user"></i> Profile info</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+		<div id="" class="profile-body">
+			<div class="panel panel-default">
+  <div class="panel-body">
+    Basic panel example
+  </div>
+</div>
+		<ul class="scrollable list-group">
 		  <li class="list-group-item row">
 			<span class="rating-num col-md-1">4.0</span>
 			<div class="review-result col-md-11">
@@ -131,21 +142,21 @@
 		  <li class="list-group-item row">
 			<span class="rating-num col-md-1">3.6</span>
 			<div class="review-result col-md-11">
-				<h4 class="list-group-item-heading">Rohit Kumar Shaw<small> , Bellandur</small></h4>
+				<h4 class="list-group-item-heading">The Monk Who sold his ferrari<small> , Bellandur</small></h4>
 				<p class="list-group-item-text">This is a very good book.The story is about a banker</p>
 			</div
 		 </li>
 		  <li class="list-group-item row">
 			<span class="rating-num col-md-1">2.7</span>
 			<div class="review-result col-md-11">
-				<h4 class="list-group-item-heading">Rohit Kumar Shaw<small> , Bellandur</small></h4>
+				<h4 class="list-group-item-heading">I too had a dream<small> , Bellandur</small></h4>
 				<p class="list-group-item-text">This is a very good book.The story is about a banker</p>
 			</div
 		 </li>
 		 <li class="list-group-item row">
 			<span class="rating-num col-md-1">4.0</span>
 			<div class="review-result col-md-11">
-				<h4 class="list-group-item-heading">Rohit Kumar Shaw<small> , Bellandur</small></h4>
+				<h4 class="list-group-item-heading">The banker to the poor<small> , Bellandur</small></h4>
 				<p class="list-group-item-text">This is a very good book.The story is about a banker</p>
 			</div
 		 </li>
@@ -157,7 +168,10 @@
 			</div
 		 </li>
 		</ul>
-	</div>
+		</div>
+		
+    </div>
+</div>
 	
 	
 	
@@ -169,6 +183,7 @@
 	
 	<script src="assets/js/leaflet.js"></script>
 	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/bootstrap-datepicker.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	
   </body>

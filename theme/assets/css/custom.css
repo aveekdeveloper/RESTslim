@@ -38,11 +38,37 @@ html, body {
 	margin-top:0px;
 	font-size: 25px; 
 	}
-
-	
+.profile-body {
+	position:absolute;
+	width:70%;
+	margin-top:50px;
+	margin-left:15%;
+    left:0;
+	right:0;
+	bottom:0;
+    top:0;
+}
+.scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+	position:absolute;
+	margin-top:50px;
+    left:0;
+	right:0;
+	bottom:0;
+    top:0;
+}	
 .nav-sidebar { 
-    width: 100%;
-    padding: 8px 0; 
+	margin-top:50px;
+	overflow: auto;
+	display: block;
+    position:absolute;
+	height:auto;
+	left:0;
+	right:0;
+	bottom:0;
+    top:0;
+	width: 15%;
     border-right: 1px solid #ddd;
 }
 .nav-sidebar a {
