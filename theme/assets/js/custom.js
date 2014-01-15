@@ -24,6 +24,13 @@ map.on('locationerror', onLocationError);
 
 map.locate({setView: true, maxZoom: 16});
 
+$("nav").hover(
+	function()
+	{
+		$(this).css("z-index","100");
+	}
+);
+
 /*
 $( '#review' ).bind( 'mousewheel DOMMouseScroll', function ( e ) {
     var e0 = e.originalEvent,

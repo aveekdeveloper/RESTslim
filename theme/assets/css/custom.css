@@ -59,18 +59,11 @@ html, body {
     top:0;
 }	
 .nav-sidebar { 
-	margin-top:50px;
-	overflow: auto;
-	display: block;
-    position:absolute;
-	height:auto;
-	left:0;
-	right:0;
-	bottom:0;
-    top:0;
-	width: 15%;
+    width: 100%;
+    padding: 8px 0; 
     border-right: 1px solid #ddd;
 }
+
 .nav-sidebar a {
     color: #333;
     -webkit-transition: all 0.08s linear;
@@ -79,7 +72,7 @@ html, body {
     transition: all 0.08s linear;
     -webkit-border-radius: 4px 0 0 4px; 
     -moz-border-radius: 4px 0 0 4px; 
-    border-radius: 4px 0 0 4px; 
+    /*border-radius: 4px 0 0 4px; */
 }
 .nav-sidebar .active a { 
     cursor: default;
