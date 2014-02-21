@@ -73,7 +73,14 @@
             <nav class="nav-sidebar">
                 <ul class="nav">
                     <li class="active"><a href="javascript:;">List a new Book</a></li>
-                    <li><a href="javascript:;">Library</a></li>
+                    <li>
+					<a href="javascript:;">Library</a>
+					<ul>
+						<li><a href="javascript:;">Currently Reading</a></li>
+						<li><a href="javascript:;">Want to read</a></li>
+						<li><a href="javascript:;">Completed</a></li>
+					</ul>
+					</li>
                     <li><a href="javascript:;">Messages</a></li>
 					<li><a href="javascript:;">Past Searches</a></li>
                     <li class="nav-divider"></li>
@@ -81,59 +88,10 @@
                 </ul>
             </nav>
         </div>
+	</div>
+	</div>
         
-		<div class="profile-body col-md-10">
-			<div class="panel panel-default">
-			  <div class="panel-body">
-				<form class="form-horizontal">
-				<fieldset>
-
-				<!-- Form Name -->
-				<legend>List a book</legend>
-
-				<!-- Text input-->
-				<div class="control-group">
-				  <label class="control-label" for="name">Book name</label>
-				  <div class="controls">
-					<input id="name" name="name" type="text" placeholder="eg: Five Point Someone" class="input-xxlarge" required="">
-					<p class="help-block">Enter the name of book you want to add</p>
-				  </div>
-				</div>
-
-				<!-- Text input-->
-				<div class="control-group">
-				  <label class="control-label" for="readdate">When did you read it</label>
-				  <div class="controls">
-					<input id="readdate" name="readdate" type="text" placeholder="Enter the date" class="input-xxlarge">
-					<p class="help-block">This will be used to order your library</p>
-				  </div>
-				</div>
-
-				<!-- Textarea -->
-				<div class="control-group">
-				  <label class="control-label" for="Review">Write a review</label>
-				  <div class="controls">                     
-					<textarea id="Review" name="Review">How did you like it? Did you enjoy or was it a waste of time?</textarea>
-				  </div>
-				</div>
-
-				<!-- Button -->
-				<div class="control-group">
-				  <label class="control-label" for="singlebutton">Single Button</label>
-				  <div class="controls">
-					<button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
-				  </div>
-				</div>
-
-				</fieldset>
-				</form>
-
-			  </div>
-			</div>
-		</div>
 		
-    </div>
-</div>
 	
     <!-- Bootstrap core JavaScript
     ================================================== -->
